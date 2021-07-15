@@ -1,16 +1,31 @@
 package main
 
 import (
-	"net/http"
+	"github.com/gdgrosario/movieland/database"
+	"github.com/gdgrosario/movieland/lib"
+	"github.com/gdgrosario/movieland/lib/middlewares"
+	"github.com/gdgrosario/movieland/routes"
 
+	"github.com/go-playground/validator/v10"
+	"github.com/joho/godotenv"
 	"github.com/labstack/echo/v4"
 )
 
-func main() {
-  e := echo.New()
+func init() {
+	godotenv.Load(".env.development")
+}
 
-  e.GET("/", func(c echo.Context) error {
-    return c.String(http.StatusOK, "Movie tracker API")
-  })
-  e.Logger.Fatal(e.Start(":4000"))
+func main() {
+	db := database.Connect()
+	defer db.Close()
+
+	e := echo.New()
+
+	e.Validator = &lib.CustomValidator{Validator: validator.New()}
+
+	e.Use(middlewares.ContextDB(db))
+
+	routes.Routes(e.Group(""))
+
+	e.Logger.Fatal(e.Start(":3000"))
 }
