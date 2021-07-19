@@ -1,0 +1,124 @@
+$color-gradient1: #840087;
+$color-gradient2: #C10044;
+$background-menu: #252527;
+$background-menu-active: #19191B;
+
+$border-radius: 25px;
+
+.navigation {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    bottom: 20px;
+    background-color: $background-menu;
+    width: 200px;
+    border-radius: $border-radius;
+    display: flex;
+    flex-direction: column;
+
+    &-logo {
+        flex: 2;
+        padding: 20px 60px 0 60px;
+        &-img {
+            width: 100%;
+        }
+    }
+
+    &-list {
+        flex: 10;
+        padding-left: 15px;
+        padding-top: 10px;
+        cursor: pointer;
+        &-item {
+            height: 45px;
+            display: flex;
+            align-items: center;
+            border-radius: $border-radius 0 0 $border-radius;
+            position: relative;
+            a {
+                display: flex;
+                width: 100%;
+            }
+        }
+    }
+}
+
+.navigation-list li.active {
+    background: $background-menu-active;
+}
+
+.navigation-list li.active a{
+    color: white;
+    .title {
+        font-weight: 300;
+        background: linear-gradient(to right bottom, $color-gradient1, $color-gradient2);
+        -webkit-background-clip: text;
+       -webkit-text-fill-color: transparent;
+         color: tomato;
+    }
+    ion-icon {
+        color: $color-gradient1;
+    }
+}
+
+.icon{
+    font-size: 25px;
+    flex: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $color-gradient1;
+}
+
+.title {
+    font-weight: 100;
+    flex: 3.5;
+    flex-shrink: 100%;
+    color: white;
+}
+
+ion-icon {
+    color: white;
+}
+
+
+/* Curvas */
+.navigation-list-item div:nth-child(1) {
+    background: $background-menu-active;
+    position: absolute;
+    height: 25px;
+    width: 100%;
+    bottom: 100%;
+    display: none;
+    z-index: -9999999;
+}
+.navigation-list-item div:nth-child(1)::before {
+    content: '';
+    background-color: $background-menu;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-bottom-right-radius: $border-radius;
+}
+
+.navigation-list-item div:nth-child(2) {
+    background: $background-menu-active;
+    position: absolute;
+    height: 25px;
+    width: 100%;
+    top: 100%;
+    display: none;
+}
+.navigation-list-item div:nth-child(2)::before {
+    content: '';
+    background-color: $background-menu;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-top-right-radius: $border-radius;
+}
+
+.navigation-list-item.active div:nth-child(1),
+.navigation-list-item.active div:nth-child(2) {
+    display: block;
+}

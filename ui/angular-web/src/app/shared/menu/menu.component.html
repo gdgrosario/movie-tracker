@@ -1,0 +1,48 @@
+<div class="navigation">
+    <div class="navigation-logo">
+        <img src="../../../assets/logo.png" alt="GoLang Logo" class=navigation-logo-img>
+    </div>
+    <ul class="navigation-list">
+        <!-- [routerLinkActiveOptions]="{ exact: true }" -->
+        <li class="navigation-list-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+            <div></div>
+            <div></div>
+            <a routerLink="/">
+                <span class="icon"><ion-icon name="home-outline"></ion-icon></span>
+                <span class="title">Home</span>
+            </a>
+        </li>
+        <li class="navigation-list-item" routerLinkActive="active">
+            <div></div>
+            <div></div>
+            <a routerLink="upcoming">
+                <span class="icon"><ion-icon name="time-outline"></ion-icon></span>
+                <span class="title">Upcoming</span>
+            </a>
+        </li>
+        <li class="navigation-list-item" routerLinkActive="active">
+            <div></div>
+            <div></div>
+            <a routerLink="watchlist">
+                <span class="icon"><ion-icon name="list-outline"></ion-icon></span>
+                <span class="title">Watchlist</span>
+            </a>
+        </li>
+        <li class="navigation-list-item" routerLinkActive="active">
+            <div></div>
+            <div></div>
+            <a routerLink="favorites">
+                <span class="icon"><ion-icon name="heart-outline"></ion-icon></span>
+                <span class="title">Favorites</span>
+            </a>
+        </li>
+        <li class="navigation-list-item" routerLinkActive="active">
+            <div></div>
+            <div></div>
+            <a routerLink="profile">
+                <span class="icon"><ion-icon name="person-outline"></ion-icon></span>
+                <span class="title">Profile</span>
+            </a>
+        </li>
+    </ul>
+</div>
