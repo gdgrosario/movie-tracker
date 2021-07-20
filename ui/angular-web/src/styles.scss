@@ -1,21 +1,21 @@
-$background-app: #0F0F0F;
+$background-app: #0f0f0f;
 
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 li {
-    list-style: none;
+  list-style: none;
 }
 
 a {
-    text-decoration: none;
+  text-decoration: none;
 }
 
 body {
-    background-color: $background-app;
-    font-family: 'Poppins', sans-serif;
-    min-height: 100vh;
+  background-color: $background-app;
+  font-family: "Poppins", sans-serif;
+  min-height: 100vh;
 }
