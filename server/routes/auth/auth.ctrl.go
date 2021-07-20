@@ -1,6 +1,7 @@
 package auth
 
 import (
+	"fmt"
 	"net/http"
 	"time"
 
@@ -32,6 +33,7 @@ func (AuthRouter) Register(c echo.Context) error {
 	db, _ := c.Get("db").(*gorm.DB)
 
 	if err := db.Where("username = ?", body.Username).First(&models.User{}).Error; err == nil {
+    fmt.Print(err);
 		return c.NoContent(http.StatusConflict)
 	}
 
