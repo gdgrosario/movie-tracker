@@ -1,0 +1,69 @@
+@mixin style-input($bg, $br, $p) {
+  width: 99%;
+  padding: $p 0;
+  border-radius: $br;
+  border: none;
+  background: $bg;
+}
+
+form {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: $black;
+  box-shadow: 1px -1px #18181a;
+  border-radius: 10px;
+  width: 25%;
+  padding: 2rem 1.5rem;
+  .sign-up {
+    text-align: center;
+    h3 {
+      color: $white;
+      margin: 0.5rem;
+    }
+    hr {
+      margin: 0 auto;
+      width: 5%;
+      border: 1px solid $bg-gradient;
+    }
+  }
+  input {
+    @include style-input($input-black, 5px, 0.5rem);
+    display: block;
+    outline: none;
+    margin: 1rem 0;
+    color: $white;
+    padding-left: 1rem;
+  }
+
+  button[type="submit"] {
+    @include style-input($gradient, 30px, 0.7rem);
+    color: $white;
+    cursor: pointer;
+    font-size: 1rem;
+  }
+
+  .sign-in {
+    text-align: center;
+    margin-block-start: 1.5rem;
+    color: $white;
+    button {
+      color: $bg-gradient;
+      border: none;
+      background-color: $black;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  form {
+    width: 80%;
+    padding: 3rem 1.5rem 2rem 1.5rem;
+  }
+  .figure {
+    display: none;
+  }
+}
