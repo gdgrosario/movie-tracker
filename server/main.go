@@ -16,7 +16,7 @@ func init() {
 }
 
 func main() {
-	db := database.Connect()
+	db := database.ConnectDB()
 	defer db.Close()
 
 	e := echo.New()

@@ -1,21 +1,33 @@
 package database
 
 import (
-	"github.com/gdgrosario/movieland/database/models"
+	"fmt"
+	"log"
+
 	"github.com/jinzhu/gorm"
-	_ "github.com/jinzhu/gorm/dialects/sqlite"
+
+	_ "github.com/lib/pq"
 )
 
-// Connect : Database connect
-func Connect() *gorm.DB {
-	db, err := gorm.Open("sqlite3", "./database/data.db")
-	db.LogMode(true)
+// ConnectDB Make the connection to the database and return the same connection
+func ConnectDB() *gorm.DB{
+  const (
+    host = "localhost"
+    user = "golang"
+    port = 5432
+    password = "golang"
+    name = "moviland"
+  )
 
-	if err != nil {
-		panic(err)
-	}
+  db, err := gorm.Open("postgres", fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=disable", host, port, user, password, name))
 
-	models.Migrate(db)
+  if err != nil {
+    log.Fatalf("Error in connect the DB %v", err)
+    return nil
+  }
 
-	return db
+  log.Println("DB connect")
+
+  return db
 }
+
