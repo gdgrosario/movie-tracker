@@ -44,17 +44,25 @@ form {
     font-size: 1rem;
   }
 
+  button[disabled] {
+    @include style-input($disabled-gradient, 30px, 0.7rem);
+  }
+
   .sign-in {
     text-align: center;
     margin-block-start: 1.5rem;
     color: $white;
-    button {
+    a {
       color: $bg-gradient;
       border: none;
       background-color: $black;
       font-size: 1rem;
       cursor: pointer;
     }
+  }
+
+  .ng-invalid {
+    color: red;
   }
 }
 

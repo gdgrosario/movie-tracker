@@ -1,13 +1,28 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { LoginComponent } from './login.component';
 import { RouterModule, Routes } from '@angular/router';
+import { ReactiveFormsModule } from '@angular/forms';
 
-const routes: Routes = [{ path: '', component: LoginComponent }];
+import { LoginComponent } from './login.component';
+import { SignupComponent } from './signup.component';
+
+const routes: Routes = [
+  { path: '', component: LoginComponent, },
+  { path: 'signup', component: SignupComponent, },
+];
 
 @NgModule({
-  declarations: [LoginComponent],
-  imports: [CommonModule, RouterModule.forChild(routes)],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  declarations: [
+    LoginComponent,
+    SignupComponent,
+  ],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    RouterModule.forChild(routes),
+  ],
+  schemas: [
+    CUSTOM_ELEMENTS_SCHEMA,
+  ],
 })
 export class LoginModule {}

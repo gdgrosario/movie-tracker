@@ -7,27 +7,36 @@ import {
   Validators,
 } from '@angular/forms';
 
+import { passwordMatchValidator } from './password-match.directive';
+
 @Component({
-  selector: 'app-login',
+  selector: 'app-signup',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })
-export class LoginComponent implements OnInit {
-  public isLogin: boolean = true;
+export class SignupComponent implements OnInit {
+  public isLogin: boolean = false;
   public form: FormGroup;
   public loading = false;
   public submitted = false;
   public error = '';
 
   // Convenience getters to access form control properties
+  get name(): AbstractControl | null { return this.form.get('name'); }
   get email(): AbstractControl | null { return this.form.get('email'); }
   get password(): AbstractControl | null { return this.form.get('password'); }
+  get repeatPassword(): AbstractControl | null { return this.form.get('repeatPassword'); }
 
   constructor(
     private formBuilder: FormBuilder,
   ) {
     this.form = this.formBuilder.group(
       {
+        name: new FormControl('User Name', {
+          validators: [
+            Validators.required,
+          ]
+        }),
         email: new FormControl('user@example.com', {
           validators: [
             Validators.email,
@@ -40,7 +49,13 @@ export class LoginComponent implements OnInit {
             Validators.required,
           ],
         }),
-      }
+        repeatPassword: new FormControl('1234', {
+          validators: [
+            Validators.required,
+          ],
+        }),
+      },
+      { validators: passwordMatchValidator },
     );
 
   }
@@ -49,7 +64,7 @@ export class LoginComponent implements OnInit {
   }
 
   submit(){
-    console.log('Login submitted');
+    console.log('Signup submitted');
   }
 
 }
