@@ -1,0 +1,34 @@
+<section>
+  <div class="info">
+    <a href="#">
+      <span class="icon"><ion-icon name="home-outline"></ion-icon></span>
+      Home
+    </a>
+  </div>
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <div class="sign-up">
+      <h3>{{ isLogin ? "Login to Tracker" : "Sign up to Tracker" }}</h3>
+      <hr />
+    </div>
+    <input *ngIf="!isLogin" type="text" formControlName="name" placeholder="Name" />
+    <input type="email" formControlName="email" placeholder="Email" />
+    <input type="password" formControlName="password" placeholder="Password" />
+    <input *ngIf="!isLogin" type="password" formControlName="repeatPassword" placeholder="Repeat password" />
+    <button [disabled]="form.invalid" type="submit">{{ isLogin ? "Sign in" : "Create Account" }}</button>
+
+    <div class="sign-in">
+      {{ isLogin ? "Not a member?" : "Already a member? " }}
+      <!-- <button [routerLink]="isLogin ? ['/login/signup'] : ['/login']">
+        {{ !isLogin ? "Sign In" : "Sign up now" }}
+      </button> -->
+      <a [routerLink]="isLogin ? ['/login/signup'] : ['/login']">
+        {{ !isLogin ? "Sign In" : "Sign up now" }}
+      </a>
+    </div>
+  </form>
+  <div class="secondary">
+    <img src="assets/logo.svg" class="logo" alt="logo" width="120" />
+    <img src="assets/figure-dark.svg" class="figure" alt="figure" width="200" />
+    <br />
+  </div>
+</section>

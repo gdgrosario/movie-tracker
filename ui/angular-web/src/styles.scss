@@ -1,1 +1,21 @@
-/* You can add global styles to this file, and also import other style files */
+$background-app: #0f0f0f;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+li {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+body {
+  background-color: $background-app;
+  font-family: "Poppins", sans-serif;
+  min-height: 100vh;
+}
