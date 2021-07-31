@@ -1,7 +1,6 @@
 package auth
 
 import (
-	"fmt"
 	"net/http"
 	"time"
 
@@ -31,11 +30,6 @@ func (AuthRouter) Register(c echo.Context) error {
 	}
 
 	db, _ := c.Get("db").(*gorm.DB)
-
-	if err := db.Where("username = ?", body.Username).First(&models.User{}).Error; err == nil {
-    fmt.Print(err);
-		return c.NoContent(http.StatusConflict)
-	}
 
 	user := models.User{
 		Username:     body.Username,
@@ -84,22 +78,15 @@ func (AuthRouter) Login(c echo.Context) error {
 	var user models.User
 
 	if err := db.Where("username = ?", body.Username).First(&user).Error; err != nil {
-		return c.NoContent(http.StatusConflict)
+		return c.JSON(http.StatusConflict, "Invalid credentials")
 	}
 
 	if bcrypt.CompareHashAndPassword([]byte(user.PasswordHash), []byte(body.Password)) != nil {
-		return c.NoContent(http.StatusInternalServerError)
+		return c.JSON(http.StatusConflict, "Invalid credentials")
 	}
 
 	token, _ := user.GenerateToken()
 
-	var cookie http.Cookie
-
-	cookie.Name = "token"
-	cookie.Value = token
-	cookie.Expires = time.Now().Add(7 * 24 * time.Hour)
-
-	c.SetCookie(&cookie)
 
 	return c.JSON(http.StatusOK, echo.Map{
 		"token": token,

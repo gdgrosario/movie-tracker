@@ -33,6 +33,6 @@ func (u *User) GenerateToken() (string, error) {
 		"username": u.Username,
 	})
 
-	tokenString, err := token.SignedString(jwtKey)
+	tokenString, err := token.SignedString([]byte(jwtKey))
 	return tokenString, err
 }
