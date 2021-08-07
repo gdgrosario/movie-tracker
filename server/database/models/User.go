@@ -14,6 +14,7 @@ type User struct {
 	gorm.Model
 	Username     string
 	PasswordHash string
+  Email        string
 	DisplayName  string
 }
 
