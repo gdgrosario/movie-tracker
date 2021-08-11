@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"log"
 
+	"github.com/gdgrosario/movieland/database/models"
 	"github.com/jinzhu/gorm"
-
 	_ "github.com/lib/pq"
 )
 
@@ -25,6 +25,8 @@ func ConnectDB() *gorm.DB{
     log.Fatalf("Error in connect the DB %v", err)
     return nil
   }
+
+  models.Migrate(db)
 
   log.Println("DB connect")
 
