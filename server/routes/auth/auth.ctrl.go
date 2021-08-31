@@ -14,10 +14,10 @@ import (
 // Register : Register Router
 func (AuthRouter) Register(c echo.Context) error {
 	type RequestBody struct {
-		Username string `json:"username" validate:"required"`
-		Password string `json:"password" validate:"required"`
-
-		DisplayName string `json:"display_name" validate:"required"`
+		Username       string `json:"username" validate:"required"`
+		Password       string `json:"password" validate:"required"`
+    Email          string `json:"email" validate:"required"`
+    DisplayName    string `json:"displayName" validate:"required"`
 	}
 
 	var body RequestBody
@@ -34,8 +34,8 @@ func (AuthRouter) Register(c echo.Context) error {
 	user := models.User{
 		Username:     body.Username,
 		PasswordHash: body.Password,
-
-		DisplayName: body.DisplayName,
+    Email:        body.Email,
+		DisplayName:  body.DisplayName,
 	}
 
 	user.HashPassword()
@@ -43,15 +43,7 @@ func (AuthRouter) Register(c echo.Context) error {
 
 	token, _ := user.GenerateToken()
 
-	var cookie http.Cookie
-
-	cookie.Name = "token"
-	cookie.Value = token
-	cookie.Expires = time.Now().Add(7 * 24 * time.Hour)
-
-	c.SetCookie(&cookie)
-
-	return c.JSON(http.StatusOK, echo.Map{
+  return c.JSON(http.StatusOK, echo.Map{
 		"token": token,
 		"user":  user,
 	})
@@ -60,7 +52,7 @@ func (AuthRouter) Register(c echo.Context) error {
 // Login : Login Router
 func (AuthRouter) Login(c echo.Context) error {
 	type RequestBody struct {
-		Username string `json:"username" validate:"required"`
+		Email    string `json:"email" validate:"required"`
 		Password string `json:"password" validate:"required"`
 	}
 
@@ -77,7 +69,7 @@ func (AuthRouter) Login(c echo.Context) error {
 
 	var user models.User
 
-	if err := db.Where("username = ?", body.Username).First(&user).Error; err != nil {
+	if err := db.Where("email = ?", body.Email).First(&user).Error; err != nil {
 		return c.JSON(http.StatusConflict, "Invalid credentials")
 	}
 
@@ -86,7 +78,6 @@ func (AuthRouter) Login(c echo.Context) error {
 	}
 
 	token, _ := user.GenerateToken()
-
 
 	return c.JSON(http.StatusOK, echo.Map{
 		"token": token,

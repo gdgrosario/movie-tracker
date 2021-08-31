@@ -12,8 +12,8 @@ type Film struct {
 	ID uint64 `gorm:"primary_key"` // auto increment uint default true
 
 	Content  string
-  	Category string
+  Category string
 	Date     time.Time
 	Title    string
-  	Views    int
+  Views    int
 }
